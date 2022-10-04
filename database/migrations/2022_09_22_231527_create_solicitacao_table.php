@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('solicitacao', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 128);
+            $table->string('prontuario', 7);
             $table->timestamps();
         });
     }
