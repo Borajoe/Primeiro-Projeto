@@ -12,7 +12,7 @@ class Solicitacao extends Model
 
     protected $table = 'solicitacao';
 
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome', 'prontuario'];
 
 
     protected static function booted()

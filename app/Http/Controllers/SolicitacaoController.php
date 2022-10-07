@@ -18,7 +18,7 @@ class SolicitacaoController extends Controller
     {
         $solicitacoes = Solicitacao::all();
         $mensagemSucesso = session('mensagem.sucesso');
-        
+
 
         return view('solicitacoes.index')->with('solicitacoes', $solicitacoes)->with('mensagemSucesso', $mensagemSucesso);
     }
@@ -41,12 +41,10 @@ class SolicitacaoController extends Controller
      */
     public function store(Solicitacao $solicitacao, SolicitacaoFormRequest $request)
     {
-        
+
         Solicitacao::create($request->all());
 
         return to_route('home.index')->with('mensagem.sucesso', "Solicitação '{$solicitacao->nome}' enviada com sucesso");
-
-        
     }
 
     /**
