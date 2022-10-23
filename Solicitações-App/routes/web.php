@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SolicitacaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/home', SolicitacaoController::class)->only([
+    'index', 'create', 'store'
+]);
 
-route::get('/home', function ()
-{
-    return view('index');
-});  
+
+route::controller(SolicitacaoController::class)->group(function(){
+    Route::get('/home', 'index')->name('home.index');
+    Route::get('home/create', 'create')->name('home.create');
+    Route::post('/home/salvar', 'store')->name('home.store');
+    Route::delete('/home/delete/{solicitacao}', 'destroy')->name('home.destroy');
+   
+});
