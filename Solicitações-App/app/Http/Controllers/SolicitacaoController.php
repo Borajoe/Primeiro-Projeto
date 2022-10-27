@@ -6,6 +6,7 @@ use App\Models\Solicitacao;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSolicitacaoRequest;
 use App\Http\Requests\UpdateSolicitacaoRequest;
+use PhpParser\Node\Stmt\Return_;
 
 class SolicitacaoController extends Controller
 {
@@ -40,7 +41,7 @@ class SolicitacaoController extends Controller
      */
     public function store(StoreSolicitacaoRequest $request)
     {
-        Solicitacao::create($request->all());
+       Solicitacao::create($request->all());
 
         return to_route('home.index')->with('mensagem.sucesso', "Solicitação do paciente '{$request->nome}, Prontuario nº {$request->prontuario}' enviada com sucesso");
     }
@@ -64,7 +65,8 @@ class SolicitacaoController extends Controller
      */
     public function edit(Solicitacao $solicitacao)
     {
-        //
+    
+        return view('edit')->with('solicitacao', $solicitacao);
     }
 
     /**
@@ -76,7 +78,12 @@ class SolicitacaoController extends Controller
      */
     public function update(UpdateSolicitacaoRequest $request, Solicitacao $solicitacao)
     {
+       $solicitacao->fill($request->all());
+       $solicitacao->save();
+        
        
+
+       return redirect()->route('home.index');
     }
 
     /**

@@ -13,7 +13,7 @@ class UpdateSolicitacaoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateSolicitacaoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+                'nome' => ['required', 'min:2'],
+                'prontuario' => ['required', 'min:6', 'max:7']
+            
         ];
     }
 }

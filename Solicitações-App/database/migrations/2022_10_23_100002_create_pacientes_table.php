@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nome', );
-            $table->unsignedBigInteger('prontuario')->unique();
+            $table->string('nome', );
+            $table->string('prontuario');
             $table->timestamps();
         });
     }
