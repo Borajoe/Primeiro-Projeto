@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::resource('/home', SolicitacaoController::class)->only([
+Route::resource('/home', SolicitacaoController::class)->only([
     'index', 'create','edit','destroy','store', 'update'
-]);*/
+]);
 
 
  route::controller(SolicitacaoController::class)->group(function(){
