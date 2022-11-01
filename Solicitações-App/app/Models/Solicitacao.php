@@ -14,6 +14,8 @@ class Solicitacao extends Model
 
     protected $fillable = ['nome', 'prontuario'];
 
+    
+
 
     protected static function booted()
     {

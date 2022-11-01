@@ -17,9 +17,11 @@
             </div>
             <tbody>
                 <tr>
+                    
                     @foreach ($solicitacoes as $solicitacao)
                         <td>{{ $solicitacao->nome }}</td>
                         <td>{{ $solicitacao->prontuario }}</td>
+                        
                         <th>
                         <th>
                             <span class="d-flex">
@@ -46,6 +48,7 @@
                         </th>
                 </tr>
                 @endforeach   
+                
             </tbody>
             </table>   
         </div>

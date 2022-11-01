@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/home', SolicitacaoController::class)->only([
-    'index', 'create','edit','destroy','store', 'update'
+    'index', 'create','edit','destroy','store', 'update','show'
 ]);
 
 
