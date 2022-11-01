@@ -6,7 +6,9 @@ use App\Models\Solicitacao;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSolicitacaoRequest;
 use App\Http\Requests\UpdateSolicitacaoRequest;
-use PhpParser\Node\Stmt\Return_;
+use Faker\Core\Color;
+
+use function Termwind\style;
 
 class SolicitacaoController extends Controller
 {
@@ -28,9 +30,10 @@ class SolicitacaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Solicitacao $solicitacao)
     {
-        return view('create');
+
+        return view('create')->with('solicitacao', $solicitacao);
     }
 
     /**
@@ -39,11 +42,26 @@ class SolicitacaoController extends Controller
      * @param  \App\Http\Requests\StoreSolicitacaoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSolicitacaoRequest $request)
+    public function store(StoreSolicitacaoRequest $request, Solicitacao $solicitacao)
     {
-       Solicitacao::create($request->all());
 
-        return to_route('home.index')->with('mensagem.sucesso', "Solicitação do paciente '{$request->nome}, Prontuario nº {$request->prontuario}' enviada com sucesso");
+        $solicitacaoa = $request->has('aceite');
+
+        if($solicitacao == true)
+        {
+
+            Solicitacao::create($request->all());
+        } else 
+        {
+            Solicitacao::create($request->all());
+        }
+                    
+
+        return to_route( 'home.index', )->with('solicitacao', $solicitacaoa)
+        ->with('mensagem.sucesso', "Solicitação do paciente '{$request->nome}, Prontuario nº {$request->prontuario}' enviada com sucesso");
+        
+        
+    
     }
 
     /**
@@ -65,7 +83,7 @@ class SolicitacaoController extends Controller
      */
     public function edit(Solicitacao $solicitacao)
     {
-    
+
         return view('edit')->with('solicitacao', $solicitacao);
     }
 
@@ -78,12 +96,12 @@ class SolicitacaoController extends Controller
      */
     public function update(UpdateSolicitacaoRequest $request, Solicitacao $solicitacao)
     {
-       $solicitacao->fill($request->all());
-       $solicitacao->save();
-        
-       
+        $solicitacao->fill($request->all());
+        $solicitacao->save();
 
-       return redirect()->route('home.index');
+
+
+        return redirect()->route('home.index');
     }
 
     /**
